@@ -1,22 +1,15 @@
 import mongoose from 'mongoose'
-import { User } from './User'
 
-const NoteSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
     user:{
-        type: User,
-        required: true
+        "id":String,
+        "password":String
     },
-    title:{
-        type: String,
-        required: true
-    },
-    body:{
-        type: String,
-        required: true
-    }
+    title: String,
+    body: String
 },{
     versionKey: false
 })
 
- const Note = mongoose.model('Note', NoteSchema);
- export { Note }
+ const Post = mongoose.model('Post', PostSchema);
+ export { Post }

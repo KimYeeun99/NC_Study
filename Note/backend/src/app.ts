@@ -3,12 +3,19 @@ import bodyParser from 'body-parser'
 import {router} from "./router"
 import mongoose from "mongoose"
 import {login} from "./login"
+import {post} from "./post"
+import path from 'path'
+import createError from 'http-errors'
+//import session from 'express-session'
 
 const app = express();
 const db = mongoose.connection;
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect('mongodb://127.0.0.1:27017/notepad');
 
@@ -19,7 +26,10 @@ db.once('open', function(){
 });
 
 app.use("/login", login);
+app.use("/post", post);
 
-app.listen(3000, () => {
-  console.log("start");
-});
+// app.listen(3000, () => {
+//   console.log("start");
+// });
+
+module.exports = app;
