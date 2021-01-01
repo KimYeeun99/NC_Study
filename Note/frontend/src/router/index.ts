@@ -14,6 +14,26 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },
+  {
+    path: '/board',
+    name: 'Board',
+    component: () => import('../views/Board.vue')
+  },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: () => import('../views/Detail.vue')
   }
 ]
 
