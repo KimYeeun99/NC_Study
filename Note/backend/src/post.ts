@@ -13,6 +13,7 @@ MongoClient.connect(url, function (err, client) {
 
   post.get('/', (req: Request, res: Response) => {
     postCollection.countDocuments((err, pageCount) => {
+      if (err) return res.status(400).send({ error: 'database failure' });
       res.json(Math.floor(pageCount / 6) + 1);
     });
   });
@@ -51,7 +52,7 @@ MongoClient.connect(url, function (err, client) {
       };
 
       postCollection.insertOne(post, (err) => {
-        if (err) return res.json({ success: false, err });
+        if (err) return res.status(400).send({ success: false, err });
         return res.json({
           success: true,
         });

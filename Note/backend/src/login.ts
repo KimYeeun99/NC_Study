@@ -12,7 +12,7 @@ MongoClient.connect(url, function (err, client) {
   const userCollection = db.collection('users');
 
   login.get('/', (req: Request, res: Response) => {
-    if (req.session.isLogedIn === undefined) {
+    if (!req.session.isLogedIn) {
       req.session.isLogedIn = false;
     }
     const userId = req.session.userId;
@@ -27,14 +27,12 @@ MongoClient.connect(url, function (err, client) {
     try {
       userCollection.findOne({ id: req.body.id }, async (err, user) => {
         if (err) return res.status(400).json({ success: false, err });
-        if (user === null) {
+        if (!user) {
           res.json({
             success: false,
           });
         } else {
-          if (
-            (await argon2.verify(user.password, req.body.password)) === true
-          ) {
+          if (await argon2.verify(user.password, req.body.password)) {
             req.session.userId = req.body.id;
             req.session.password = req.body.password;
             req.session.isLogedIn = true;
