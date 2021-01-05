@@ -6,7 +6,7 @@
     <router-link to="/register">Register</router-link> |
     <router-link to="/board">Board</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>

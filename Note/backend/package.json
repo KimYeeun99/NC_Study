@@ -14,6 +14,7 @@
     "express-session": "^1.17.1",
     "express-winston": "^4.0.5",
     "http-errors": "^1.8.0",
+    "mongodb": "^3.6.3",
     "mongoose": "^5.11.9",
     "nodemon": "^2.0.6",
     "session": "^0.1.0",
