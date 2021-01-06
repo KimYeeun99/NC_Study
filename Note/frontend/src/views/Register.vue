@@ -28,10 +28,13 @@ export default class Home extends Vue {
         password: this.password,
       })
       .then(response => {
-        if (response.data.success === false) {
+        if (response.data.success) {
           alert('가입에 성공하였습니다!');
+        } else {
+          alert('가입에 실패하였습니다.');
         }
-      });
+      })
+      .catch(err => alert('에러발생'));
   }
 }
 </script>

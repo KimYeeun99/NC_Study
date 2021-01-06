@@ -44,7 +44,7 @@ export default class Detail extends Vue {
 
   update() {
     axios
-      .put('/api/post/read/' + this.$route.params.id, {
+      .put(`/api/post/read/${this.$route.params.id}`, {
         title: this.board.title,
         body: this.board.body,
       })
