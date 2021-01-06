@@ -1,9 +1,11 @@
 <template>
   <div id="detail" v-if="!isUpdating">
     <h1>상세페이지</h1>
-    <span><button v-if="isUser" @click="updatePost()">수정</button></span>
-    <span><button v-if="isUser" @click="deletePost()">삭제</button></span>
     Title : {{ board.title }} User Id : {{ id }} Text : {{ board.body }}
+    <div>
+      <button v-if="isUser" @click="updatePost()">수정</button>
+      <button v-if="isUser" @click="deletePost()">삭제</button>
+    </div>
   </div>
   <div id="update" v-else>
     <input placeholder="title" v-model="board.title" />
@@ -50,9 +52,9 @@ export default class Detail extends Vue {
       })
       .then(response => {
         if (response.data.success) {
-          alert('수정에 성공하였습니다.');
+          alert(response.data.msg);
         } else {
-          alert('성공하지 못했습니다.');
+          alert(response.data.msg);
         }
       })
       .catch(err => alert('에러발생'));
@@ -64,10 +66,10 @@ export default class Detail extends Vue {
       .then(response => {
         if (response.data.success) {
           this.isDeleted = true;
-          alert('성공하였습니다.');
+          alert(response.data.msg);
           router.push('/board');
         } else {
-          alert('성공하지 못했습니다.');
+          alert(response.data.msg);
         }
       })
       .catch(err => alert('에러발생'));

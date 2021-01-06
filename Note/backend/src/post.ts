@@ -55,6 +55,7 @@ MongoClient.connect(url, function (err, client) {
         if (err) return res.status(400).send({ success: false, err });
         return res.json({
           success: true,
+          msg: '글 생성 성공.',
         });
       });
     } catch (err) {
@@ -99,7 +100,7 @@ MongoClient.connect(url, function (err, client) {
           { $set: post },
           function (err) {
             if (err) res.status(400).json({ error: 'failed to update' });
-            res.json({ success: true });
+            res.json({ success: true, msg: '수정에 성공하였습니다.' });
           }
         );
       }
@@ -113,6 +114,7 @@ MongoClient.connect(url, function (err, client) {
         if (err) return res.status(400).json({ error: 'database failure' });
         res.json({
           success: true,
+          msg: '삭제 성공하였습니다.',
         });
       }
     );

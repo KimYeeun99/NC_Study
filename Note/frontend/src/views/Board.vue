@@ -91,10 +91,10 @@ export default class Home extends Vue {
       })
       .then(response => {
         if (response.data.success) {
-          alert('글이 성공적으로 등록되었습니다.');
+          alert(response.data.msg);
           this.notCreate = true;
         } else {
-          alert('등록 실패');
+          alert(response.data.msg);
         }
       })
       .catch(err => alert('에러발생'));

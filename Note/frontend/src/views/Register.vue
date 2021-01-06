@@ -1,9 +1,11 @@
 <template>
   <div class="login">
     <h1>가입하기</h1>
-    <input v-model="id" placeholder="id" type="text" /><br />
-    <input v-model="password" placeholder="password" type="text" /><br />
-    <button @click="register">가입</button><br />
+    <div><input v-model="id" placeholder="id" type="text" /></div>
+    <div>
+      <input v-model="password" placeholder="password" type="password" />
+    </div>
+    <button @click="register">가입</button>
   </div>
 </template>
 
@@ -30,11 +32,9 @@ export default class Home extends Vue {
       .then(response => {
         if (response.data.success) {
           alert('가입에 성공하였습니다!');
-        } else {
-          alert('가입에 실패하였습니다.');
         }
       })
-      .catch(err => alert('에러발생'));
+      .catch(err => alert('이미 존재하는 아이디입니다.'));
   }
 }
 </script>

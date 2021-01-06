@@ -30,6 +30,7 @@ MongoClient.connect(url, function (err, client) {
         if (!user) {
           res.json({
             success: false,
+            msg: '아이디가 존재하지 않습니다.',
           });
         } else {
           if (await argon2.verify(user.password, req.body.password)) {
@@ -38,11 +39,13 @@ MongoClient.connect(url, function (err, client) {
             req.session.isLogedIn = true;
             res.json({
               success: true,
+              msg: '로그인 성공',
             });
           } else {
             // password did not match
             res.json({
               success: false,
+              msg: '비밀번호가 다릅니다.',
             });
           }
         }
@@ -68,17 +71,21 @@ MongoClient.connect(url, function (err, client) {
             if (err) return res.status(400).json({ success: false, err });
             return res.json({
               success: true,
+              msg: '가입 성공.',
             });
           });
         } else {
           return res.status(400).json({
             success: false,
+            msg: '이미 존재하는 아이디입니다',
           });
         }
       });
     } catch (err) {
       res.status(400).json({
         success: false,
+        err,
+        msg: '가입실패',
       });
     }
   });
