@@ -1,10 +1,10 @@
 <template>
-  <Calculator/>
+  <Calculator />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import Calculator from './components/HelloWorld.vue';
+import Calculator from './components/Calculator.vue';
 
 @Options({
   components: {
