@@ -32,6 +32,11 @@
     <div class="button" @click="num('0')">0</div>
     <div class="button" @click="num('00')">00</div>
 
+    <h1>{{ operator }}</h1>
+    <h1>{{ preNum }}</h1>
+    <h1>{{ secNum }}</h1>
+    <h1>{{ opClick }}</h1>
+
     <h1>{{ memoryNum }}</h1>
   </div>
 </template>
@@ -53,13 +58,15 @@ export default class Calculator extends Vue {
   firstOp = true;
   result = '';
   preNum = 0;
+  secNum = 0;
   memoryNum = '';
-  operator: Operator = '+';
+  operator: Operator | null = null;
 
   clear() {
     this.result = '';
     this.firstOp = true;
     this.preNum = 0;
+    this.secNum = 0;
   }
 
   memClear() {
@@ -117,12 +124,10 @@ export default class Calculator extends Vue {
   }
 
   calc() {
-    const calcNum = CalcFunctions[this.operator](
-      this.preNum,
-      parseFloat(this.result)
-    );
-
-    this.result = calcNum.toString();
+    if (this.operator) {
+      const calcNum = CalcFunctions[this.operator](this.preNum, this.secNum);
+      this.result = calcNum.toString();
+    }
   }
 
   op(operator: Operator) {
@@ -141,6 +146,8 @@ export default class Calculator extends Vue {
   equal() {
     if (this.opClick) {
       this.result = this.preNum.toString();
+    } else {
+      this.secNum = parseFloat(this.result);
     }
     this.calc();
     this.setPre();
